@@ -1,28 +1,45 @@
 /* Note that for now, these values are able to be changed to suit the page better when we have more of it constructed */
 h1 {
-  color: 'white';
-  font-size: 60 px;
+  font-size: 60vh;
   font-weight: bold;
   /* This style is to be used for the giant "FRAMES" heading */
 }
 
 h2 {
-  color: 'white';
-  font-size: 34 px;
+  font-size: 34vh;
   font-weight: bold;
   /* This is for the subheadings like the "Trending Now" and "All Time Hits" headings */
 }
 
 h3 {
-  color: 'white';
-  font-size: 24 px;
+  font-size: 24vh;
   /* Subheadings under h2 */
 }
 
 h4 {
-  
+
+  /* Smaller headings */
 }
 
 p {
-  
+  /* Smaller, normal text like the media descriptions and comment content */
+}
+
+body {
+  background: #000000;
+  color: white;
+  min-height: 100vh;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, SegoeUI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.geometric-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;        
+  opacity: 0.4;
+  background-image: url("3e4ecfc2b77a93aa177fc6093e6d7546976a4a11.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;                  
 }
