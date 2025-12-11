@@ -42,166 +42,185 @@
   </nav>
 
   <!-- MAIN -->
-  <main class="flex-1 max-w-6xl mx-auto px-4 py-10">
-
-    <h1 class="text-3xl font-semibold mb-10">Top 10 Movies</h1>
+  <main class="flex-1 flex flex-col max-w-6xl mx-auto px-4 py-10">
+    
+    <h1 class="text-4xl md:text-5xl font-semibold mb-6">Top 10 Movies</h1>
 
     <!-- TRENDING NOW ROW -->
-    <section class="mb-14">
+    <section class="flex-1 flex flex-col">
       <h2 class="text-3xl font-semibold mb-6">Trending Now</h2>
+      <div class="relative flex-1 flex items-center">
 
-      <div class="relative">
-        <div class="flex gap-6 overflow-x-auto pb-6 no-scrollbar">
+        <!-- SCROLLING -->
+        <div
+          id="trendingRow"
+          class="flex gap-6 overflow-x-auto no-scrollbar w-full py-6"
+        >
 
           <!-- 1 -->
-          <div class="relative flex-shrink-0 w-44">
-            <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg"
-                 class="rounded-xl w-full h-60 object-cover border border-gray-700" />
+          <div class="relative flex-shrink-0 w-48 md:w-56 h-72 md:h-80">
+            <img
+              src="https://image.tmdb.org/t/p/w1280/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg"
+              class="rounded-xl w-full h-full object-cover border border-gray-700"
+              alt="Inception poster"
+            />
             <span class="absolute bottom-2 left-2 text-6xl font-black drop-shadow-lg">1</span>
           </div>
 
           <!-- 2 -->
-          <div class="relative flex-shrink-0 w-44">
-            <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg"
-                 class="rounded-xl w-full h-60 object-cover border border-gray-700" />
+          <div class="relative flex-shrink-0 w-48 md:w-56 h-72 md:h-80">
+            <img
+              src="https://image.tmdb.org/t/p/w1280/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
+              class="rounded-xl w-full h-full object-cover border border-gray-700"
+              alt="Interstellar poster"
+            />
             <span class="absolute bottom-2 left-2 text-6xl font-black drop-shadow-lg">2</span>
           </div>
 
           <!-- 3 -->
-          <div class="relative flex-shrink-0 w-44">
-            <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg"
-                 class="rounded-xl w-full h-60 object-cover border border-gray-700" />
+          <div class="relative flex-shrink-0 w-48 md:w-56 h-72 md:h-80">
+            <img
+              src="https://image.tmdb.org/t/p/w1280/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg"
+              class="rounded-xl w-full h-full object-cover border border-gray-700"
+              alt="Avatar poster"
+            />
             <span class="absolute bottom-2 left-2 text-6xl font-black drop-shadow-lg">3</span>
           </div>
 
           <!-- 4 -->
-          <div class="relative flex-shrink-0 w-44">
-            <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/kqjL17yufvn9OVLyXYpvtyrFfak.jpg"
-                 class="rounded-xl w-full h-60 object-cover border border-gray-700" />
+          <div class="relative flex-shrink-0 w-48 md:w-56 h-72 md:h-80">
+            <img
+              src="https://image.tmdb.org/t/p/w1280/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+              class="rounded-xl w-full h-full object-cover border border-gray-700"
+              alt="The Dark Knight poster"
+            />
             <span class="absolute bottom-2 left-2 text-6xl font-black drop-shadow-lg">4</span>
           </div>
 
+          <!-- 5 -->
+          <div class="relative flex-shrink-0 w-48 md:w-56 h-72 md:h-80">
+            <img
+              src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg"
+              class="rounded-xl w-full h-full object-cover border border-gray-700"
+              alt="The Matrix poster"
+            />
+            <span class="absolute bottom-2 left-2 text-6xl font-black drop-shadow-lg">5</span>
+          </div>
+
+          <!-- 6 -->
+          <div class="relative flex-shrink-0 w-48 md:w-56 h-72 md:h-80">
+            <img
+              src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg"
+              class="rounded-xl w-full h-full object-cover border border-gray-700"
+              alt="Pulp Fiction poster"
+            />
+            <span class="absolute bottom-2 left-2 text-6xl font-black drop-shadow-lg">6</span>
+          </div>
+
+          <!-- 7 -->
+          <div class="relative flex-shrink-0 w-48 md:w-56 h-72 md:h-80">
+            <img
+              src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/bptfVGEQuv6vDTIMVCHjJ9Dz8PX.jpg"
+              class="rounded-xl w-full h-full object-cover border border-gray-700"
+              alt="Fight Club poster"
+            />
+            <span class="absolute bottom-2 left-2 text-6xl font-black drop-shadow-lg">7</span>
+          </div>
+
+          <!-- 8 -->
+          <div class="relative flex-shrink-0 w-48 md:w-56 h-72 md:h-80">
+            <img
+              src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg"
+              class="rounded-xl w-full h-full object-cover border border-gray-700"
+              alt="The Fellowship of the Ring poster"
+            />
+            <span class="absolute bottom-2 left-2 text-6xl font-black drop-shadow-lg">8</span>
+          </div>
+
+          <!-- 9 -->
+          <div class="relative flex-shrink-0 w-48 md:w-56 h-72 md:h-80">
+            <img
+              src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"
+              class="rounded-xl w-full h-full object-cover border border-gray-700"
+              alt="The Shawshank Redemption poster"
+            />
+            <span class="absolute bottom-2 left-2 text-6xl font-black drop-shadow-lg">9</span>
+          </div>
+
+          <!-- 10 -->
+          <div class="relative flex-shrink-0 w-48 md:w-56 h-72 md:h-80">
+            <img
+              src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
+              class="rounded-xl w-full h-full object-cover border border-gray-700"
+              alt="The Godfather poster"
+            />
+            <span class="absolute bottom-2 left-2 text-6xl font-black drop-shadow-lg">10</span>
+          </div>
+
         </div>
 
-        <!-- RIGHTFLICK ARROW -->
-        <div class="absolute right-0 top-1/2 -translate-y-1/2 pr-2 text-4xl font-black text-white pointer-events-none select-none">
+        <!-- LEFT ARROW -->
+        <button
+          id="scrollLeft"
+          class="hidden absolute left-0 top-1/2 -translate-y-1/2 pl-2 w-10 h-10 flex items-center justify-center
+                 text-3xl font-black text-white bg-black/60 rounded-full border border-gray-700
+                 hover:bg-gray-900/80"
+        >
+          &lt;
+        </button>
+
+        <!-- RIGHT ARROW -->
+        <button
+          id="scrollRight"
+          class="absolute right-0 top-1/2 -translate-y-1/2 pr-2 w-10 h-10 flex items-center justify-center
+                 text-3xl font-black text-white bg-black/60 rounded-full border border-gray-700
+                 hover:bg-gray-900/80"
+        >
           &gt;
-        </div>
+        </button>
       </div>
     </section>
-
-    <!-- ORIGINAL #1 FEATURE -->
-    <div class="mb-14 rounded-xl overflow-hidden bg-black/60 border border-gray-800 backdrop-blur-sm">
-      <div class="grid grid-cols-1 md:grid-cols-2">
-
-        <div class="aspect-[2/3] bg-gray-900">
-          <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg"
-               class="w-full h-full object-cover" />
-        </div>
-
-        <div class="p-6 flex flex-col justify-center space-y-4">
-          <div class="flex items-center gap-3">
-            <span class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">#1</span>
-            <h2 class="text-3xl font-semibold">Inception</h2>
-          </div>
-
-          <p class="text-gray-400">2010 • Sci-Fi, Thriller</p>
-
-          <div class="flex items-center gap-2">
-            <span class="text-yellow-400 text-xl">★★★★★</span>
-            <span class="text-gray-400">4.8 / 5</span>
-          </div>
-
-          <p class="text-gray-300">
-            A mind-bending dream-heist thriller from Christopher Nolan. One of the most discussed movies of the decade.
-          </p>
-
-          <a href="movie.html?id=inception"
-             class="mt-4 inline-block px-4 py-3 rounded-lg text-sm font-medium bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 w-fit">
-            View Details
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2–10 GRID -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-
-      <!-- #2 -->
-      <div class="bg-black/60 border border-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow backdrop-blur-sm">
-        <div class="aspect-[2/3] bg-gray-900">
-          <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg"
-               class="w-full h-full object-cover" />
-        </div>
-
-        <div class="p-4 space-y-2">
-          <h3 class="text-xl font-semibold flex items-center gap-2">
-            <span class="text-purple-400 font-black">#2</span> Interstellar
-          </h3>
-          <p class="text-gray-400 text-sm">2014</p>
-          <div class="flex items-center gap-2">
-            <span class="text-yellow-400">★★★★★</span>
-            <span class="text-gray-400 text-sm">5.0</span>
-          </div>
-          <a href="movie.html?id=interstellar"
-             class="block w-full text-center mt-3 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
-            View Details
-          </a>
-        </div>
-      </div>
-
-      <!-- #3 -->
-      <div class="bg-black/60 border border-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow backdrop-blur-sm">
-        <div class="aspect-[2/3] bg-gray-900">
-          <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg"
-               class="w-full h-full object-cover" />
-        </div>
-
-        <div class="p-4 space-y-2">
-          <h3 class="text-xl font-semibold flex items-center gap-2">
-            <span class="text-purple-400 font-black">#3</span> Avatar
-          </h3>
-          <p class="text-gray-400 text-sm">2009</p>
-          <div class="flex items-center gap-2">
-            <span class="text-yellow-400">★★★☆☆</span>
-            <span class="text-gray-400 text-sm">3.0</span>
-          </div>
-          <a href="movie.html?id=avatar"
-             class="block w-full text-center mt-3 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
-            View Details
-          </a>
-        </div>
-      </div>
-
-      <!-- #4 -->
-      <div class="bg-black/60 border border-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow backdrop-blur-sm">
-        <div class="aspect-[2/3] bg-gray-900">
-          <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/kqjL17yufvn9OVLyXYpvtyrFfak.jpg"
-               class="w-full h-full object-cover" />
-        </div>
-
-        <div class="p-4 space-y-2">
-          <h3 class="text-xl font-semibold flex items-center gap-2">
-            <span class="text-purple-400 font-black">#4</span> The Dark Knight
-          </h3>
-          <p class="text-gray-400 text-sm">2008</p>
-          <div class="flex items-center gap-2">
-            <span class="text-yellow-400">★★★★★</span>
-            <span class="text-gray-400 text-sm">5.0</span>
-          </div>
-          <a href="movie.html?id=darkknight"
-             class="block w-full text-center mt-3 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
-            View Details
-          </a>
-        </div>
-      </div>
-
-    </div>
   </main>
 
   <footer class="max-w-6xl mx-auto px-4 pb-8 text-xs text-gray-500 text-center">
     © 2025 FRAMES. All rights reserved.
   </footer>
 
+  <script>
+    const trendingRow = document.getElementById('trendingRow');
+    const scrollRightBtn = document.getElementById('scrollRight');
+    const scrollLeftBtn = document.getElementById('scrollLeft');
+
+    const SCROLL_AMOUNT = 300;
+
+    function updateArrows() {
+      if (!trendingRow) return;
+
+
+      if (trendingRow.scrollLeft > 0) {
+        scrollLeftBtn.classList.remove('hidden');
+      } else {
+        scrollLeftBtn.classList.add('hidden');
+      }
+    }
+
+    scrollRightBtn.addEventListener('click', () => {
+      trendingRow.scrollBy({
+        left: SCROLL_AMOUNT,
+        behavior: 'smooth'
+      });
+    });
+
+    scrollLeftBtn.addEventListener('click', () => {
+      trendingRow.scrollBy({
+        left: -SCROLL_AMOUNT,
+        behavior: 'smooth'
+      });
+    });
+
+    trendingRow.addEventListener('scroll', updateArrows);
+
+    window.addEventListener('load', updateArrows);
+  </script>
 </body>
 </html>
