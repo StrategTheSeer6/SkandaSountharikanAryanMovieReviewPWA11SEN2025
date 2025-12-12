@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FRAMES – Recommended Movies</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../static/styles.css">
+
+<body class="min-h-screen text-white bg-black flex flex-col">
+
+  <div class="geometric-bg"></div>
+
+  <!-- NAV -->
+  <nav class="border-b border-gray-800 bg-black/60 backdrop-blur-sm sticky top-0 z-20">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg border border-purple-400 flex items-center justify-center text-purple-400">
+          🎬
+        </div>
+        <a href="/" class="text-xl font-semibold tracking-widest">
+          FRAMES
+        </a>
+      </div>
+
+      <div class="hidden md:flex items-center gap-4 text-sm">
+        <a href="/browse" class="px-3 py-2 rounded-md bg-gray-900 text-white">
+          Recommended Movies
+        </a>
+        <a href="/top10" class="px-3 py-2 rounded-md hover:bg-gray-900/70">
+          Top 10
+        </a>
+      </div>
+
+      <div class="relative flex items-center gap-2 text-sm">
+        {% if session.get("user") %}
+          <!-- PROFILE DROPDOWN -->
+          <div class="relative group">
+
+            <!-- TRIGGER -->
+            <button
+              class="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-900/70 transition">
+
+              <img
+                src="../static/assets/images/pfp/default.png"
+                class="w-8 h-8 rounded-full border border-purple-500 object-cover"
+                alt="Profile picture">
+
+              <span class="hidden sm:block text-white font-medium">
+                {{ session["user"] }}
+              </span>
+
+              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
+                  stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <!-- DROPDOWN OPTIONS -->
+            <div
+              class="absolute right-0 mt-2 w-44 bg-black/90 border border-gray-800
+                    rounded-lg shadow-lg opacity-0 invisible
+                    group-hover:opacity-100 group-hover:visible
+                    transition-all duration-150 z-50">
+
+              <a href="/profile"
+                class="block px-4 py-2 text-sm hover:bg-gray-900">
+                Profile
+              </a>
+
+              <div class="border-t border-gray-800 my-1"></div>
+
+              <a href="/logout"
+                class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-900">
+                Log out
+              </a>
+            </div>
+
+          </div>
+        {% else %}
+          <!-- LOGGED OUT -->
+          <a href="/login"
+            class="px-3 py-2 rounded-md hover:bg-gray-900/70">
+            Sign in
+          </a>
+          <a href="/signup"
+            class="px-3 py-2 rounded-md bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+            Sign up
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="flex-1 max-w-6xl mx-auto px-4 py-10">
+
+    <h1 class="text-3xl font-semibold mb-8">Recommended Movies</h1>
+
+    <!-- GRID -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
+
+      <!-- MOVIE CARD -->
+      <div class="bg-black/60 border border-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow backdrop-blur-sm">
+        <div class="aspect-[2/3] bg-gray-900">
+          <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg"
+               class="w-full h-full object-cover">
+        </div>
+
+        <div class="p-4">
+          <h3 class="text-lg font-semibold line-clamp-1">Inception</h3>
+          <p class="text-gray-400 text-sm mb-3">2010</p>
+
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-yellow-400">★★★★☆</span>
+            <span class="text-gray-400 text-sm">4.8</span>
+          </div>
+
+          <a href="/movie?id=inception"
+             class="block w-full text-center px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+            View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- COPY THIS CARD TO ADD MORE MOVIES -->
+      <div class="bg-black/60 border border-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow backdrop-blur-sm">
+        <div class="aspect-[2/3] bg-gray-900">
+          <img src="https://m.media-amazon.com/images/I/91JnoM0khKL._AC_UF1000,1000_QL80_.jpg"
+               class="w-full h-full object-cover">
+        </div>
+
+        <div class="p-4">
+          <h3 class="text-lg font-semibold line-clamp-1">Interstellar</h3>
+          <p class="text-gray-400 text-sm mb-3">2014</p>
+
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-yellow-400">★★★★★</span>
+            <span class="text-gray-400 text-sm">5.0</span>
+          </div>
+
+          <a href="/movie?id=interstellar"
+             class="block w-full text-center px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+            View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- ANOTHER -->
+      <div class="bg-black/60 border border-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow backdrop-blur-sm">
+        <div class="aspect-[2/3] bg-gray-900">
+          <img src="https://images.squarespace-cdn.com/content/v1/61c4da8eb1b30a201b9669f2/d102db69-5dea-482a-a7d5-8ac38ec3e706/avatar3.jpg"
+               class="w-full h-full object-cover">
+        </div>
+
+        <div class="p-4">
+          <h3 class="text-lg font-semibold line-clamp-1">Avatar</h3>
+          <p class="text-gray-400 text-sm mb-3">2009</p>
+
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-yellow-400">★★★☆☆</span>
+            <span class="text-gray-400 text-sm">3.0</span>
+          </div>
+
+          <a href="/movie?id=avatar"
+             class="block w-full text-center px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+            View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- FOURTH -->
+      <div class="bg-black/60 border border-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow backdrop-blur-sm">
+        <div class="aspect-[2/3] bg-gray-900">
+          <img src="https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg"
+               class="w-full h-full object-cover">
+        </div>
+
+        <div class="p-4">
+          <h3 class="text-lg font-semibold line-clamp-1">The Dark Knight</h3>
+          <p class="text-gray-400 text-sm mb-3">2008</p>
+
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-yellow-400">★★★★★</span>
+            <span class="text-gray-400 text-sm">5.0</span>
+          </div>
+
+          <a href="/movie?id=darkknight"
+             class="block w-full text-center px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+            View Details
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="max-w-6xl mx-auto px-4 pb-8 text-xs text-gray-500 text-center">
+    © 2025 FRAMES. All rights reserved.
+  </footer>
+
+</body>
+</html>
