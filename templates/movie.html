@@ -124,10 +124,6 @@
             ▶ Play Trailer
           </a>
 
-          <button class="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700">
-            ➕ My List
-          </button>
-
         </div>
 
 
@@ -146,21 +142,33 @@
     {% endif %}
 
     <!-- COMMENT FORM -->
-    <form method="POST" class="space-y-4">
-      <input type="number" step="0.1" min="0" max="10"
-            name="rating"
-            class="w-full p-2 bg-gray-900 rounded"
-            placeholder="Rating (0–10)" required>
+    {% if session.get("user") %}
+      <form method="POST" class="space-y-4">
 
-      <textarea name="comment"
-                class="w-full p-3 bg-gray-900 rounded"
-                placeholder="Write your review..."
-                required></textarea>
+        <input type="number" step="0.1" min="0" max="10"
+              name="rating"
+              class="w-full p-2 bg-gray-900 rounded"
+              placeholder="Rating (0–10)" required>
 
-      <button class="px-4 py-2 bg-purple-600 rounded">
-        Post review
-      </button>
-    </form>
+        <textarea name="comment"
+                  class="w-full p-3 bg-gray-900 rounded"
+                  placeholder="Write your review..."
+                  required></textarea>
+
+        <button class="px-4 py-2 bg-purple-600 rounded">
+          Post review
+        </button>
+
+      </form>
+    {% else %}
+      <div class="p-4 bg-gray-900/60 border border-gray-700 rounded-lg text-gray-400">
+        <a href="/login" class="text-purple-400 underline hover:text-purple-300">
+          Log in
+        </a>
+        to post a review.
+      </div>
+    {% endif %}
+
 
     <!-- EXISTING COMMENTS DISPLAY -->
     <div class="space-y-4 pt-6">
@@ -184,7 +192,7 @@
                   {{ c[0] }}
                 </a>
                 <div class="text-xs text-gray-400">
-                  {{ c[4] }}
+                  {{ c[3] }}
                 </div>
               </div>
             </div>
@@ -193,6 +201,7 @@
             <div class="flex items-center gap-1 text-yellow-400 font-semibold">
               ★ {{ c[1] }}
             </div>
+
           </div>
 
           <!-- COMMENT -->
@@ -200,14 +209,10 @@
             {{ c[2] }}
           </p>
 
-          <p class="text-blue-200 leading-relaxed">
-            Date Published: {{ c[3] }}
-          </p>
-
-
         </div>
       {% endfor %}
     </div>
+
 
 
 

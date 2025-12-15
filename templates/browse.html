@@ -26,11 +26,14 @@
       </div>
 
       <div class="hidden md:flex items-center gap-4 text-sm">
-        <a href="/browse" class="px-3 py-2 rounded-md bg-gray-900 text-white">
-          Recommended Movies
+        <a href="/" class="px-3 py-2 rounded-md bg-gray-900 text-white">
+          Home
         </a>
-        <a href="/top10" class="px-3 py-2 rounded-md hover:bg-gray-900/70">
-          Top 10
+        <a href="/browse" class="px-3 py-2 rounded-md bg-gray-900 text-white">
+          Browse
+        </a>
+        <a href="/top10" class="px-3 py-2 rounded-md hover:bg-gray-900/70 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400">
+          Surprise Me!
         </a>
       </div>
 
@@ -66,11 +69,6 @@
                     group-hover:opacity-100 group-hover:visible
                     transition-all duration-150 z-50">
 
-              <a href="/profile"
-                class="block px-4 py-2 text-sm hover:bg-gray-900">
-                Profile
-              </a>
-
               <div class="border-t border-gray-800 my-1"></div>
 
               <a href="/logout"
@@ -98,7 +96,7 @@
   <!-- MAIN -->
   <main class="flex-1 max-w-6xl mx-auto px-4 py-10">
 
-    <h1 class="text-3xl font-semibold mb-8">Recommended Movies</h1>
+    <h1 class="text-3xl font-semibold mb-8">Browse Movies</h1>
 
     <form method="GET" action="/browse" class="mb-8 flex flex-col sm:flex-row gap-4">
 
