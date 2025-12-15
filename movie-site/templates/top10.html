@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FRAMES – Top 10 Movies</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../static/styles.css">
+
+  <style>
+    /* HIDING SCROLLBAR */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.movie-card {
+  position: relative;
+}
+
+.movie-poster {
+  position: relative;
+  z-index: 2;                   /* ABOVE NUMBER */
+  border-radius: 12px;
+}
+
+  </style>
+</head>
+
+<body class="min-h-screen text-white bg-black flex flex-col">
+  <div class="geometric-bg"></div>
+
+  <!-- NAV -->
+  <nav class="border-b border-gray-800 bg-black/60 backdrop-blur-sm sticky top-0 z-20">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg border border-purple-400 flex items-center justify-center text-purple-400">
+          🎬
+        </div>
+        <a href="/" class="text-xl font-semibold tracking-widest">
+          FRAMES
+        </a>
+      </div>
+
+      <div class="hidden md:flex items-center gap-4 text-sm">
+        <a href="/" class="px-3 py-2 rounded-md bg-gray-900 text-white">Home</a>
+        <a href="/browse" class="px-3 py-2 rounded-md hover:bg-gray-900">Browse</a>
+        <a href="/top10" class="px-3 py-2 rounded-md hover:bg-gray-900/70 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400">Surprise Me!</a>
+        
+      </div>
+
+      <div class="relative flex items-center gap-2 text-sm">
+        {% if session.get("user") %}
+          <!-- PROFILE DROPDOWN -->
+          <div class="relative group">
+
+            <!-- TRIGGER -->
+            <button
+              class="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-900/70 transition">
+
+              <img
+                src="../static/assets/images/pfp/default.png"
+                class="w-8 h-8 rounded-full border border-purple-500 object-cover"
+                alt="Profile picture">
+
+              <span class="hidden sm:block text-white font-medium">
+                {{ session["user"] }}
+              </span>
+
+              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
+                  stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <!-- DROPDOWN OPTIONS -->
+            <div
+              class="absolute right-0 mt-2 w-44 bg-black/90 border border-gray-800
+                    rounded-lg shadow-lg opacity-0 invisible
+                    group-hover:opacity-100 group-hover:visible
+                    transition-all duration-150 z-50">
+
+              <div class="border-t border-gray-800 my-1"></div>
+
+              <a href="/logout"
+                class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-900">
+                Log out
+              </a>
+            </div>
+
+          </div>
+        {% else %}
+          <!-- LOGGED OUT -->
+          <a href="/login"
+            class="px-3 py-2 rounded-md hover:bg-gray-900/70">
+            Sign in
+          </a>
+          <a href="/signup"
+            class="px-3 py-2 rounded-md bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+            Sign up
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="flex-1 flex flex-col max-w-6xl mx-auto px-4 py-10">
+    
+    <h1 class="text-4xl md:text-5xl font-semibold mb-6">10 Surprise Movies!</h1>
+
+    <!-- TRENDING NOW ROW -->
+    <section class="flex-1 flex flex-col">
+      <h2 class="text-3xl font-semibold mb-6">Reload this page for more <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400">FRAMES</span></h2>
+      <div class="relative">
+
+        <!-- LEFT ARROW -->
+        <button
+          type="button"
+          id="scrollLeft"
+          class="hidden absolute left-0 top-1/2 -translate-y-1/2 z-10
+                w-10 h-10 flex items-center justify-center
+                text-3xl font-black text-white
+                bg-black/60 rounded-full border border-gray-700
+                hover:bg-gray-900/80">
+          &lt;
+        </button>
+
+        <!-- SCROLLABLE ROW -->
+        <div
+          id="trendingRow"
+          class="flex gap-6 overflow-x-auto overflow-y-hidden no-scrollbar
+                py-6 px-12"
+        >
+          {% for movie in movies %}
+            <div class="relative flex-shrink-0 w-48 md:w-56 h-72 md:h-80">
+
+              <a href="/movie?id={{ movie[0] }}">
+                <img
+                  src="{{ movie[2] }}"
+                  class="rounded-xl w-full h-full object-cover border border-gray-700"
+                  alt="{{ movie[1] }} poster"
+                />
+              </a>
+
+              <span class="absolute bottom-2 left-2 text-6xl font-black drop-shadow-lg">
+                {{ loop.index }}
+              </span>
+
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- RIGHT ARROW -->
+        <button
+          type="button"
+          id="scrollRight"
+          class="absolute right-0 top-1/2 -translate-y-1/2 z-10
+                w-10 h-10 flex items-center justify-center
+                text-3xl font-black text-white
+                bg-black/60 rounded-full border border-gray-700
+                hover:bg-gray-900/80">
+          &gt;
+        </button>
+
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="max-w-6xl mx-auto px-4 pb-8 text-xs text-gray-500 text-center">
+    © 2025 FRAMES. All rights reserved.
+  </footer>
+
+  <script>
+    const trendingRow = document.getElementById('trendingRow');
+    const scrollRightBtn = document.getElementById('scrollRight');
+    const scrollLeftBtn = document.getElementById('scrollLeft');
+
+    const SCROLL_AMOUNT = 300;
+
+    function updateArrows() {
+      if (!trendingRow) return;
+
+
+      if (trendingRow.scrollLeft > 0) {
+        scrollLeftBtn.classList.remove('hidden');
+      } else {
+        scrollLeftBtn.classList.add('hidden');
+      }
+    }
+
+    scrollRightBtn.addEventListener('click', () => {
+      trendingRow.scrollBy({
+        left: SCROLL_AMOUNT,
+        behavior: 'smooth'
+      });
+    });
+
+    scrollLeftBtn.addEventListener('click', () => {
+      trendingRow.scrollBy({
+        left: -SCROLL_AMOUNT,
+        behavior: 'smooth'
+      });
+    });
+
+    trendingRow.addEventListener('scroll', updateArrows);
+
+    window.addEventListener('load', updateArrows);
+  </script>
+</body>
+</html>
