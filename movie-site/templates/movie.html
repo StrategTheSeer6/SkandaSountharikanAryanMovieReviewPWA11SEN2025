@@ -73,7 +73,7 @@
 
         <!-- RATING -->
         <div class="flex items-center gap-2 text-yellow-400">
-          ★ <span class="text-white">{{ movie[3] }}</span>
+          ★ <span class="text-white">{{ "%.1f"|format(movie[3] or 0) }}</span>
         </div>
 
         <!-- DESCRIPTION -->
@@ -131,92 +131,137 @@
     </div>
   </section>
 
-  <section class="max-w-4xl mx-auto space-y-6">
+  <section class="max-w-7xl mx-auto px-4 mt-12">
 
-    <h2 class="text-2xl font-semibold">Reviews</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_3fr_1fr] gap-8">
 
-    {% if error %}
-      <div class="p-3 rounded bg-red-900/40 border border-red-700 text-red-300">
-        {{ error }}
-      </div>
-    {% endif %}
+      <!-- LEFT AD -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-28">
+          <a href="https://raidshadowlegends.com/" 
+            class="block h-[600px] rounded-xl overflow-hidden border border-gray-800
+                    hover:scale-[1.01] hover:shadow-xl transition">
 
-    <!-- COMMENT FORM -->
-    {% if session.get("user") %}
-      <form method="POST" class="space-y-4">
+            <img
+              src="../static/ads/sample-ad1-300x600.png"
+              alt="Sponsored Ad"
+              class="w-full h-full object-cover"
+            >
 
-        <input type="number" step="0.1" min="0" max="10"
-              name="rating"
-              class="w-full p-2 bg-gray-900 rounded"
-              placeholder="Rating (0–10)" required>
+            <span class="absolute top-2 right-2 text-xs text-gray-400 bg-black/70 px-2 py-0.5 rounded">
+              Sponsored
+            </span>
 
-        <textarea name="comment"
-                  class="w-full p-3 bg-gray-900 rounded"
-                  placeholder="Write your review..."
-                  required></textarea>
-
-        <button class="px-4 py-2 bg-purple-600 rounded">
-          Post review
-        </button>
-
-      </form>
-    {% else %}
-      <div class="p-4 bg-gray-900/60 border border-gray-700 rounded-lg text-gray-400">
-        <a href="/login" class="text-purple-400 underline hover:text-purple-300">
-          Log in
-        </a>
-        to post a review.
-      </div>
-    {% endif %}
-
-
-    <!-- EXISTING COMMENTS DISPLAY -->
-    <div class="space-y-4 pt-6">
-      {% for c in comments %}
-        <div class="p-5 rounded-xl bg-gray-900 border border-gray-800">
-
-          <!-- HEADER -->
-          <div class="flex items-center justify-between mb-2">
-
-            <!-- USER -->
-            <div class="flex items-center gap-3">
-              <a href="/user/{{ c[0] }}">
-                <img
-                  src="/static/assets/pfp/{{ c[1] }}"
-                  class="w-10 h-10 rounded-full border border-purple-500 object-cover"
-                >
-              </a>
-
-              <div>
-                <a href="/user/{{ c[0] }}" class="font-semibold hover:underline">
-                  {{ c[0] }}
-                </a>
-                <div class="text-xs text-gray-400">
-                  {{ c[3] }}
-                </div>
-              </div>
-            </div>
-
-            <!-- RATING -->
-            <div class="flex items-center gap-1 text-yellow-400 font-semibold">
-              ★ {{ c[1] }}
-            </div>
-
-          </div>
-
-          <!-- COMMENT -->
-          <p class="text-gray-200 leading-relaxed">
-            {{ c[2] }}
-          </p>
-
+          </a>
         </div>
-      {% endfor %}
+      </aside>
+
+
+      <!-- REVIEWS -->
+      <div class="space-y-6">
+
+        <h2 class="text-2xl font-semibold">Reviews</h2>
+
+        {% if error %}
+          <div class="p-3 rounded bg-red-900/40 border border-red-700 text-red-300">
+            {{ error }}
+          </div>
+        {% endif %}
+
+        <!-- COMMENT FORM -->
+        {% if session.get("user") %}
+          <form method="POST" class="space-y-4">
+
+            <input type="number" step="1" min="0" max="10"  
+                  name="rating"
+                  class="w-full p-2 bg-gray-900 rounded"
+                  placeholder="Rating (0–10)" required>        <!-- STEP WAS CHANGED TO MITIGATE WEIRD RATINGS -->
+
+            <textarea name="comment"
+                      class="w-full p-3 bg-gray-900 rounded"
+                      placeholder="Write your review..."
+                      required></textarea>
+
+            <button class="px-4 py-2 bg-purple-600 rounded">
+              Post review
+            </button>
+
+          </form>
+        {% else %}
+          <div class="p-4 bg-gray-900/60 border border-gray-700 rounded-lg text-gray-400">
+            <a href="/login" class="text-purple-400 underline hover:text-purple-300">
+              Log in
+            </a>
+            to post a review.
+          </div>
+        {% endif %}
+
+        <!-- EXISTING COMMENTS -->
+        <div class="space-y-4 pt-6">
+          {% for c in comments %}
+            <div class="p-5 rounded-xl bg-gray-900 border border-gray-800">
+
+              <div class="flex items-center justify-between mb-2">
+
+                <div class="flex items-center gap-3">
+                  <a href="/user/{{ c[0] }}">
+                    <img
+                      src="../static/assets/images/pfp/default.png"
+                      class="w-10 h-10 rounded-full border border-purple-500 object-cover"
+                    >
+                  </a>
+
+                  <div>
+                    <a href="/user/{{ c[0] }}" class="font-semibold hover:underline">
+                      {{ c[0] }}
+                    </a>
+                    <div class="text-xs text-gray-400">
+                      {{ c[3] }}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-1 text-yellow-400 font-semibold">
+                  ★ {{ (c[1] | float) | round(0) | int }}
+                </div>
+
+              </div>
+
+              <p class="text-gray-200 leading-relaxed">
+                {{ c[2] }}
+              </p>
+
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+
+      <!-- RIGHT AD -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-28">
+          <a href="https://www.disneymovie.ca/zootopia2/home/"
+            class="block h-[600px] rounded-xl overflow-hidden border border-gray-800
+                    hover:scale-[1.01] hover:shadow-xl transition">
+
+            <img
+              src="../static/ads/sample-ad2-300x600.png"
+              alt="Sponsored Ad"
+              class="w-full h-full object-cover"
+            >
+
+            <span class="absolute top-2 right-2 text-xs text-gray-400 bg-black/70 px-2 py-0.5 rounded">
+              Sponsored
+            </span>
+
+          </a>
+        </div>
+      </aside>
+
+
     </div>
-
-
-
-
   </section>
+
 
 
 

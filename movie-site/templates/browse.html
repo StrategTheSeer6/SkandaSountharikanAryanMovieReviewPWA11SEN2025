@@ -155,7 +155,7 @@
 
           <div class="flex items-center gap-2 mb-4">
             <span class="text-yellow-400">★</span>
-            <span class="text-gray-400 text-sm">{{ movie[3] }}</span>
+            <span class="text-gray-400 text-sm">{{ "%.1f"|format(movie[3] or 0) }}</span>  <!-- FORMATTED RATING TO ESCAPE ANY USER DECIMAL ABUSE -->
           </div>
 
           <a

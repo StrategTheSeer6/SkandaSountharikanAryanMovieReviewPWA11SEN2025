@@ -50,7 +50,7 @@
                   {{ r[1] }}
                 </a>
                 <div class="text-yellow-400 font-medium">
-                  ★ {{ r[3] }}
+                  ★ {{ (r[3] | default(0) | float) | round(0) | int }}
                 </div>
                 <div class="text-xs text-gray-400">
                   {{ r[5] }}
@@ -80,6 +80,17 @@
          class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700">
         Log out
       </a>
+
+      {% if session.get("user") == username %}
+      <form method="POST" action="/delete_account"
+            onsubmit="return confirm('Are you sure? This will permanently delete your account and all reviews.')">
+        <button
+          class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 border border-red-700 text-white">
+          Delete Account
+        </button>
+      </form>
+      {% endif %}
+
     </div>
 
   </div>

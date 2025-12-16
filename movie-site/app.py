@@ -960,7 +960,24 @@ def movie():
         if "user" not in session:
             conn.close()
             return redirect("/login")
-        rating = float(request.form["rating"])
+        try:
+            rating = int(request.form["rating"])
+        except ValueError:
+            return render_template(
+                "movie.html",
+                movie=movie,
+                comments=comments,
+                error="Rating must be a whole number between 0 and 10."
+            )
+
+        if rating < 0 or rating > 10:
+            return render_template(
+                "movie.html",
+                movie=movie,
+                comments=comments,
+                error="Rating must be between 0 and 10."
+            )
+
         comment = request.form["comment"]
 
         cursor.execute(
@@ -981,11 +998,11 @@ def movie():
         if already_reviewed:
             conn.close()
             return render_template(
-                "movie.html",
-                movie=movie,
-                comments=comments,
-                error="You have already reviewed this movie."
+                "redirect_alert.html",
+                message="You have already reviewed this movie.",
+                redirect_url="/browse"
             )
+
 
         cursor.execute("""
             INSERT INTO CommentList
@@ -1007,13 +1024,14 @@ def movie():
 
         cursor.execute("""
             UPDATE MovieList
-            SET FilmRating = (
+            SET FilmRating = ROUND((
                 SELECT AVG(CommentRating)
                 FROM CommentList
-                WHERE MovieID=?
-            )
-            WHERE FilmID=?
+                WHERE MovieID = ?
+            ), 1)
+            WHERE FilmID = ?
 """, (movie_id, movie_id))
+
 
         conn.commit()
         return redirect(f"/movie?id={movie_id}")
@@ -1123,9 +1141,73 @@ def user_profile(username):
         reviews=reviews
     )
 
+@app.route("/delete_account", methods=["POST"])
+def delete_account():
+    if "user" not in session:
+        return redirect("/login")
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    # GET USER ID
+    cursor.execute(
+        "SELECT UserID FROM AccountsDetail WHERE Username=?",
+        (session["user"],)
+    )
+    row = cursor.fetchone()
+    if not row:
+        conn.close()
+        session.clear()
+        return redirect("/")
+
+    user_id = row[0]
+
+    # FIND AND DELETE REVIEWS CORRESPONDING TO THIS USER
+    cursor.execute("""
+        SELECT DISTINCT MovieID
+        FROM CommentList
+        WHERE UserID=?
+    """, (user_id,))
+    affected_movies = cursor.fetchall()
+
+    cursor.execute(
+        "DELETE FROM CommentList WHERE UserID=?",
+        (user_id,)
+    )
+
+    # RECALCULATE MOVIE RATINGS 
+    for (movie_id,) in affected_movies:
+        cursor.execute("""
+            UPDATE MovieList
+            SET FilmRating = (
+                SELECT ROUND(AVG(CommentRating), 1)
+                FROM CommentList
+                WHERE MovieID = ?
+            )
+            WHERE FilmID = ?
+        """, (movie_id, movie_id))
+
+    # DELETE USER ACCOUNT. 
+    cursor.execute(
+        "DELETE FROM AccountsDetail WHERE UserID=?",
+        (user_id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    # LOG OUT
+    session.clear()
+    return redirect("/")
 
 
+#LOCAL FLASK - ACTIVATE BEFORE SUBMISSION
+#if __name__ == "__main__":
+#    app.run(debug=True)
 
+#ngrok script - DO NOT RUN THIS ON MARKING - DEACTIVATE BEFORE SUBMISSION
+#USED FOR COLLABORATION AMONG PEERS (HOSTING THE WEBSITE, FOR MULTIPLE PEOPLE TO ACCESS.)
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=False)
+
 
