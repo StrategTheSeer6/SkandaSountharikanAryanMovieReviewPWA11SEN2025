@@ -1202,12 +1202,12 @@ def delete_account():
 
 
 #LOCAL FLASK - ACTIVATE BEFORE SUBMISSION
-#if __name__ == "__main__":
-#    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
 
 #ngrok script - DO NOT RUN THIS ON MARKING - DEACTIVATE BEFORE SUBMISSION
 #USED FOR COLLABORATION AMONG PEERS (HOSTING THE WEBSITE, FOR MULTIPLE PEOPLE TO ACCESS.)
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=False)
+#if __name__ == "__main__":
+#    app.run(host="0.0.0.0", port=5000, debug=False)
 
 
